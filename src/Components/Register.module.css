@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+}
+.outerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  align-items: center;
+  padding: 20px;
+  height: 96vh;
+  border-radius: 10px;
+  box-shadow: 4px 3px 10px 2px rgba(157, 146, 146, 0.16);
+}
+
+.createTitle {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  color: #333333;
+}
+
+.headingBox {
+  font-family: "Bilbo";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 96px;
+  font-size: 70px;
+  line-height: 120px;
+  text-align: center;
+  color: #000000;
+}
+
+.fieldTitle {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 12px;
+  margin-bottom: 10px;
+
+  /* Dark Grey */
+
+  color: #333333;
+}
+.inputField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 16px 16px;
+  gap: 4px;
+  height: 54px;
+  background: #f4f4f4;
+  border-radius: 8px;
+}
+
+.error {
+  border-radius: 8px;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  color: white;
+  /* font-size: 14px; */
+}
+
+.successMsg{
+  border-radius: 8px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  color: white;
+}
+.heading {
+  font-family: "Epilogue";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: -0.05em;
+  color: #333333;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.16);
+    border-radius: 8px;
+    width: 328px;
+    height: 50px;
+}
+
+@media (min-width: 360px) and (max-width: 1023px) {
+  .btn {
+    height: 56px;
+    width: 328px;
+  }
+}

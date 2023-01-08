@@ -79,7 +79,7 @@ const Register = () => {
   const saveHandler = async () => {
     // console.log("button clicked");
     if (validate()) {
-      const resp = await axios.post("http://localhost:5000/tic-tac-toe/game/v1/user/register", {
+      const resp = await axios.post("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/register", {
           name: input.name,
           email: input.email,
           userName: input.userName,

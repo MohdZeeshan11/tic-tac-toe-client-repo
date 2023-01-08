@@ -76,7 +76,7 @@ const Login = () => {
   };
     const saveHandler = async () => {
       if (validate()) {
-        const resp = await axios.post("http://localhost:5000/tic-tac-toe/game/v1/user/login", {
+        const resp = await axios.post("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/login", {
           email: input.email,
           password: input.password,
         },{

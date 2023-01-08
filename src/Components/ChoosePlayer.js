@@ -61,7 +61,7 @@ const ChoosePlayer = () => {
 
   const saveHandler = async () => {
     if (validate()) {
-        const resp =  await axios.post("http://localhost:5000/tic-tac-toe/game/v1/user/getPlayer", {
+        const resp =  await axios.post("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/getPlayer", {
             email: input.email,
           },{
             // headers: headersProvider(),

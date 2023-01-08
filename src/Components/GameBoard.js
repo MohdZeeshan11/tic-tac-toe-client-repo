@@ -75,7 +75,7 @@ const GameBoard = () => {
 
     await axios
       .patch(
-        "http://localhost:5000/tic-tac-toe/game/v1/user/board-data",
+        "https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/board-data",
         {
           playerId: userData._id,
           boardData: [...copyBoxValue],
@@ -103,7 +103,7 @@ const GameBoard = () => {
     console.log("userData id = ", userData._id);
     const resp = await axios
       .get(
-        `http://localhost:5000/tic-tac-toe/game/v1/user/get-single-Player/${userData._id}`,
+        `https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/get-single-Player/${userData._id}`,
         { headers: headersProvider() }
       )
       .catch((e) => {
@@ -118,7 +118,7 @@ const GameBoard = () => {
   const startAnotherGame = async (isWinner) => {
     setBoxValue(Array(9).fill(null));
     await axios
-      .patch("http://localhost:5000/tic-tac-toe/game/v1/user/board-data", {
+      .patch("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/board-data", {
         playerId: userData._id,
         boardData: Array(9).fill(null),
       },{

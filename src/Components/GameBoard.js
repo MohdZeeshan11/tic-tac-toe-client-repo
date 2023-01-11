@@ -170,6 +170,7 @@ const GameBoard = () => {
 
   useEffect(() => {
     // getSinglePlayer();
+    // eslint-disable-next-line 
     getCurrentPlayerData();
   }, []);
 

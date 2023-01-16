@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
+  deleteCookie,
+  getCookiesSession,
   // deleteCookie,
   // getCookiesSession,
   headersProvider,
@@ -19,6 +21,7 @@ const GameBoard = () => {
   const [boxValue, setBoxValue] = useState(Array(9).fill(null));
   const [isXTurn, setIsXTurn] = useState(true);
   const [winnerVal] = useState(false);
+  const [checkToken,setCheckToken] = useState(true);
   // const [playerData,setPlayerData] = useState({});
   // const [currentValue, setCurrentValue] = useState('');
   // const [value, setValue] = useState("");
@@ -57,6 +60,10 @@ const GameBoard = () => {
   const isWinner = checkWinner();
 
   const clickHandler = async (index) => {
+    if(!checkToken){
+      alert("user is not authorized or token missing");
+      return;
+    }
     if (boxValue[index] === "X" || boxValue[index] === "O") {
       return;
     }
@@ -76,6 +83,7 @@ const GameBoard = () => {
     await axios
       .patch(
         "https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/board-data",
+        // "http://localhost:5000/tic-tac-toe/game/v1/user/board-data",
         {
           playerId: userData._id,
           boardData: [...copyBoxValue],
@@ -86,6 +94,7 @@ const GameBoard = () => {
       )
       .catch((e) => {
         console.error(e);
+        // alert("user is not authorized or token missing");
       });
   };
 
@@ -104,13 +113,17 @@ const GameBoard = () => {
     const resp = await axios
       .get(
         `https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/get-single-Player/${userData._id}`,
+        // `http://localhost:5000/tic-tac-toe/game/v1/user/get-single-Player/${userData._id}`,
         { headers: headersProvider() }
       )
       .catch((e) => {
-        console.error(e.message);
-        // alert("something wrong");
+        console.error(e);
+        setCheckToken(false);
+        alert("user is not authorized or token missing");
+
       });
     if (resp.data.success) {
+      setCheckToken(true);
       setBoxValue(resp.data.user.boardData);
     }
   };
@@ -119,6 +132,7 @@ const GameBoard = () => {
     setBoxValue(Array(9).fill(null));
     await axios
       .patch("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/board-data", {
+      // .patch("http://localhost:5000/tic-tac-toe/game/v1/user/board-data", {
         playerId: userData._id,
         boardData: Array(9).fill(null),
       },{
@@ -170,8 +184,8 @@ const GameBoard = () => {
 
   useEffect(() => {
     // getSinglePlayer();
-    // eslint-disable-next-line 
     getCurrentPlayerData();
+      // eslint-disable-next-line 
   }, []);
 
   return (
@@ -184,11 +198,12 @@ const GameBoard = () => {
             className="ml-2"
             onClick={() => {
               //   setBoxValue(Array(9).fill(null));
-              //   if (getCookiesSession('userDataToken')) {
-              //     deleteCookie('userDataToken');
-              // }
+                if (getCookiesSession('userDataToken')) {
+                  deleteCookie('userDataToken');
+              }
 
-              navigate("/start-game");
+              // navigate("/start-game");
+              navigate("/");
             }}
             style={{ cursor: "pointer" }}
           >

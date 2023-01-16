@@ -77,6 +77,7 @@ const Login = () => {
     const saveHandler = async () => {
       if (validate()) {
         const resp = await axios.post("https://server-tic-tac-toe.onrender.com/tic-tac-toe/game/v1/user/login", {
+        // const resp = await axios.post("http://localhost:5000/tic-tac-toe/game/v1/user/login", {
           email: input.email,
           password: input.password,
         },{
@@ -84,8 +85,8 @@ const Login = () => {
           noTrailingSlash: true,
         }).catch((e) => {
           setError(true)
-          console.error(e.message);
-          alert('please enter correct email and password');
+          console.error(e);
+          alert('please enter correct email and password or user is not exist');
         });
         dispatch(addUser(resp.data.user));
         // console.log('response = ',resp)
@@ -96,22 +97,13 @@ const Login = () => {
             setCookiesSession('userDataToken', userJwtToken, 7);
           }
         }
-        // if (resp) {
-        //   const UserJwtToken = resp.data.accessToken
-        //   // console.log('login user = ',resp.data.user)
-        //   // dispatch(({
-        //   //   type:ADD_USER,
-        //   //   payload:resp.data.user
-        //   // }))
-        //   // console.log('token = ',UserJwtToken)
-        //   if (UserJwtToken) {
-        //     // setCookiesSession('userData', trueCounselJwtToken, 7);
-        //   }
-        // }
 
-        if(resp.data.success){
-          navigate("/start-game");
+        if(resp.data.success && resp.data.accessToken){
+          // navigate("/start-game");
+          navigate("/new-game");
           setError(false)
+        }else{
+          alert('user is not authorized')
         }
       }
     };
